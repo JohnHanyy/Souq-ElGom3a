@@ -19,5 +19,6 @@ public:
     float GetterPrice() const;
     int GetterQuantity() const;
     void SetterQuantity(int);
+    void IncreaseQuantity(int);
 };
 int Product::ind = 0;

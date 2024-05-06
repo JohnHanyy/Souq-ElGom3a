@@ -30,4 +30,9 @@ int Product::GetterQuantity() const
 }
 void Product::SetterQuantity(int n)
 {
+    quantity = n;
+}
+void Product::IncreaseQuantity(int n)
+{
+    quantity += n;
 }

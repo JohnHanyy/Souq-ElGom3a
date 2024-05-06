@@ -15,5 +15,8 @@ private:
 public:
     Allproducts();
     void CreateProduct(string, float, int);
+    void DeleteProduct(string);
+    bool Search(string);
+    void Refill(string, int);
     void Display();
 };

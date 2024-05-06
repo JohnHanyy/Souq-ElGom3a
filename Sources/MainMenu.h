@@ -14,7 +14,12 @@ private:
 
 public:
     MainMenu();
+    void HomePage();
+    void NavPage();
+    void MarketPage();
+    void UserPage();
+    void CartPage();
+    void WalletsPage();
     void Login();
     void Register();
-    void Display_Market();
 };
