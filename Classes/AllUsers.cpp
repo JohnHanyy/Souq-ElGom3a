@@ -16,5 +16,24 @@ User *AllUsers::CreateUser(string e, string pw, string n, int a, int num, bool a
 {
     User *temp = new User(n, a, e, pw, num, admin);
     All_Users.push_back(temp);
+    ind++;
     return temp;
+}
+
+void AllUsers::save()
+{
+    ofstream save;
+    save.open("allusers.dat", ios::trunc);
+    save.close();
+    for (int i = 0; i < ind; i++)
+    {
+        All_Users[i]->save();
+    }
+    save.open("allusers.dat", ios::app);
+    save << endl;
+    save.close();
+}
+
+void AllUsers::load()
+{
 }

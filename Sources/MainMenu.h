@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <vector>
 #include "User.h"
 #include "AllUsers.h"
 #include "AllProducts.h"

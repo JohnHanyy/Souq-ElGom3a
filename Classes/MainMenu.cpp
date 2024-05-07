@@ -132,7 +132,9 @@ void MainMenu::NavPage()
         else if (inp == 2)
             return;
         else if (inp == 3)
-            return;
+        {
+            return WalletsPage();
+        }
         else if (inp == 4)
             return UserPage();
         else
@@ -280,5 +282,59 @@ void MainMenu::UserPage()
     else
     {
         return UserPage();
+    }
+}
+
+void MainMenu::CartPage()
+{
+    cout << "Your cart" << endl
+         << "Cart Products" << endl;
+}
+
+void MainMenu::WalletsPage()
+{
+    int choose;
+    cout << "Your Wallets" << endl;
+    current_user->Cards_Display();
+    cout << "[1] To add a new card" << endl
+         << "[2] To remove a card" << endl
+         << "[3] return" << endl;
+    cin >> choose;
+    if (choose == 1)
+    {
+        string name;
+        float balance;
+        int cvv, cardnum;
+        cout << "Enter Card Name: ";
+        cin >> name;
+        cout << "Enter Card Balance: ";
+        cin >> balance;
+        cout << "Enter CVV: ";
+        cin >> cvv;
+        cout << "Enter Card Number: ";
+        cin >> cardnum;
+        current_user->Add_Credit_card(name, balance, cvv, cardnum);
+        cout << "Card added" << endl;
+        return WalletsPage();
+    }
+    if (choose == 2)
+    {
+        string cardname;
+        cout << "Enter the card name" << endl;
+        cin >> cardname;
+        if (current_user->Delete_Wallet(cardname))
+        {
+            cout << "Card deleted successfully" << endl;
+            return WalletsPage();
+        }
+        else
+        {
+            cout << "card not found" << endl;
+            return WalletsPage();
+        }
+    }
+    else if (choose == 3)
+    {
+        return NavPage();
     }
 }

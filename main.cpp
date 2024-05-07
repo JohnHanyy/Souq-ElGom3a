@@ -4,6 +4,7 @@
 #include "Classes/AllUsers.cpp"
 #include "Classes/Product.cpp"
 #include "Classes/User.cpp"
+#include "Classes/Ewallet.cpp"
 
 using namespace std;
 int main()

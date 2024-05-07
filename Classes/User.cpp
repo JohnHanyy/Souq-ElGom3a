@@ -94,6 +94,60 @@ void User::User_Display()
 //         }
 //     }
 // }
+
+void User::Cards_Display()
+{
+    for (int i = 0; i < Ewallets.size(); i++)
+    {
+        cout << "Wallet Number " << i + 1 << endl;
+        Ewallets[i].display();
+    }
+}
+
+vector<Ewallet> *User::Get_Cards()
+{
+    return &Ewallets;
+}
+
+void User::Add_Credit_card(string name, float balance, int CVV, int Card_Number)
+{
+    Ewallet *temp = new Ewallet(name, balance, CVV, Card_Number);
+    Ewallets.push_back(*temp);
+}
+
+bool User::Delete_Wallet(string W_Name)
+{
+    for (int i = 0; i < Ewallets.size(); i++)
+    {
+        if (Ewallets[i].getName() == W_Name)
+        {
+            Ewallets.erase(Ewallets.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
+// Save and Load
+void User::save()
+{
+    fstream save;
+    save.open("allusers.dat", ios::app);
+    save << Name << '\t' << Email
+         << '\t' << Password << '\t' << ID
+         << '\t' << Age << '\t' << Phone_Number
+         << '\t' << admin << '\t' << Ewallets.size() << '\t';
+    for (int j = 0; j < Ewallets.size(); j++)
+    {
+        save << '\t' << Ewallets[j].getName() << '\t'
+             << Ewallets[j].getBalance()
+             << '\t' << Ewallets[j].getCardNumber()
+             << '\t' << Ewallets[j].getCVV();
+    }
+    save << endl;
+    save.close();
+}
+
 User::~User()
 {
     delete this;

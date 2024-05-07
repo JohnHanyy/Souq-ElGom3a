@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "Ewallet.h"
+
 using namespace std;
 
 class User
@@ -17,7 +19,7 @@ private:
     bool admin;
     vector<string> Addresses;
     static int ind;
-    // vector<Credit_card> Credit_cards;
+    vector<Ewallet> Ewallets;
     // Cart User_Cart;
 
 public:
@@ -32,10 +34,13 @@ public:
     string Get_Email();
     string Get_password();
     bool IsAdmin();
+    vector<Ewallet> *Get_Cards();
     // Setters
-    void Add_Credit_card(int, string, int);
+    void Add_Credit_card(string, float, int, int);
     void Change_Password(string);
     void Add_Address(string);
+
+    bool Delete_Wallet(string);
 
     // Display
     void User_Display();

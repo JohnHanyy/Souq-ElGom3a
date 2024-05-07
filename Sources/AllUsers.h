@@ -12,6 +12,7 @@ class AllUsers
 {
 private:
     vector<User *> All_Users;
+    int ind = 0;
 
 public:
     // Constructor and Deconstructor
