@@ -16,9 +16,9 @@ private:
 public:
     Cart();
     void AddProduct(Product *, int);
-    void RemoveProduct(string);
+    int RemoveProduct(string);
     void CalculateTotal();
     void Display();
-
+    void recetcart();
     float Get_Toltal();
 };

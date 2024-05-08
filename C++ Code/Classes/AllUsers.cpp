@@ -41,6 +41,19 @@ void AllUsers::save()
     }
 }
 
+void AllUsers::Display()
+{
+    for (int i = 0; i < All_Users.size(); i++)
+    {
+        All_Users[i]->User_Display();
+    }
+}
+
+void AllUsers::removeuser(int id)
+{
+    All_Users.erase(All_Users.begin() + id);
+}
+
 void AllUsers::load()
 {
     int tempID;

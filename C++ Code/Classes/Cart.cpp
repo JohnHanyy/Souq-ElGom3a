@@ -6,6 +6,7 @@ Cart::Cart()
 }
 void Cart::CalculateTotal()
 {
+    total = 0;
     for (const auto &iter : prods)
     {
         total += iter.second->GetterPrice() * iter.second->GetterQuantity();
@@ -36,14 +37,21 @@ void Cart::AddProduct(Product *a, int q)
     }
     return CalculateTotal();
 };
-void Cart::RemoveProduct(string n)
+int Cart::RemoveProduct(string n)
 {
+    int q = prods[n]->GetterQuantity();
     delete prods[n];
     prods.erase(n);
-    return CalculateTotal();
+    CalculateTotal();
+    return q;
 }
 
 float Cart::Get_Toltal()
 {
     return total;
+}
+
+void Cart::recetcart()
+{
+    prods.clear();
 }

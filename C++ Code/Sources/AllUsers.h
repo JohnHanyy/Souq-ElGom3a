@@ -21,7 +21,9 @@ public:
 
     User *Search(string);
     User *CreateUser(string, string, string, int, int, bool);
+    void removeuser(int);
 
+    void Display();
     // read from file and save init
     void save();
     void load();

@@ -41,11 +41,12 @@ public:
 
     Cart *GetCart();
     bool Pay(string);
-    // Setters
+
     void Add_Credit_card(string, float, int, int);
+    void Change_Email(string);
     void Change_Password(string);
     void Add_Address(string);
-
+    void recetcart();
     bool Delete_Wallet(string);
     // Save and load
     void save();

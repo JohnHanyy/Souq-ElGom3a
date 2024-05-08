@@ -153,17 +153,118 @@ void MainMenu::NavPage()
     {
         cout << "[1] SuperMarket" << endl;
         cout << "[2] User Info " << endl;
+        cout << "[3] Edit Users" << endl;
         cout << "[0] Logout " << endl;
         cin >> inp;
         if (inp == 1)
             return MarketPage();
         else if (inp == 2)
             return UserPage();
-
+        else if (inp == 3)
+            return EditUsersPage();
         else
             return HomePage();
     }
 }
+
+void MainMenu::EditUsersPage()
+{
+    int ind;
+    string Email, Password, name;
+    int age, num;
+    bool a;
+    cout << "Current Users" << endl;
+    Users.Display();
+    cout << "[1] Add" << endl;
+    cout << "[2] Remove User " << endl;
+    cout << "[3] Edit Users" << endl;
+    cout << "[0] Return " << endl;
+    cin >> ind;
+    if (ind == 1)
+    {
+        cout << "Enter User's Data" << endl;
+        cout << "Enter Your Email : ";
+        cin >> Email;
+        cout << "Enter Your Password : ";
+        cin >> Password;
+        cout << "Enter Your Name : ";
+        cin >> name;
+        cout << "Enter Your Age : ";
+        cin >> age;
+        cout << "Enter Your Phone Number : ";
+        cin >> num;
+        cout << "Admin [0] [1] : ";
+        cin >> a;
+        if (!Users.Search(Email))
+        {
+            Users.CreateUser(Email, Password, name, age, num, a);
+            cout << "Successful Creation !!" << endl;
+            return Login();
+        }
+        else
+        {
+            cout << endl
+                 << "Error! Email is used!!!" << endl;
+            return EditUsersPage();
+        }
+    }
+    else if (ind == 2)
+    {
+        string Email;
+        cout << "Enter User's Email" << endl;
+        cin >> Email;
+        if (Users.Search(Email))
+        {
+            Users.removeuser(Users.Search(Email)->Get_ID());
+            cout << "Removed" << endl;
+            return EditUsersPage();
+        }
+        else
+        {
+            cout << "User not found" << endl;
+            return EditUsersPage();
+        }
+    }
+    else if (ind == 3)
+    {
+        string Email;
+        string temp;
+        bool choose;
+        if (Users.Search(Email))
+        {
+            User *tempuser = Users.Search(Email);
+        }
+        else
+        {
+            cout << "Not found" << endl;
+            return EditUsersPage();
+        }
+        cout << "Enter User's Email" << endl;
+        cin >> Email;
+        User *tempuser = Users.Search(Email);
+        cout << "Choose what you want to change" << endl;
+        cout << "[0] Email" << endl;
+        cout << "[1] Password" << endl;
+        cin >> choose;
+        if (choose == 0)
+        {
+            cout << "choose What you want to change to" << endl;
+            tempuser->Change_Email(temp);
+            return EditUsersPage();
+        }
+        else if (choose == 1)
+        {
+            cout << "choose What you want to change to" << endl;
+            tempuser->Change_Password(temp);
+            return EditUsersPage();
+        }
+    }
+    else if (ind == 0)
+    {
+        return NavPage();
+    }
+}
+
 void MainMenu::MarketPage()
 {
     int inp;
@@ -312,7 +413,9 @@ void MainMenu::CartPage()
         string name;
         cout << "Enter Name:" << endl;
         cin >> name;
-        current_user->GetCart()->RemoveProduct(name);
+        int i = current_user->GetCart()->RemoveProduct(name);
+        supermarket.GetProduct(name)->IncreaseQuantity(i);
+        return CartPage();
     }
     else if (inp == 2)
     {
@@ -325,6 +428,7 @@ void MainMenu::CartPage()
             if (current_user->Pay(name))
             {
                 cout << "Pay successful" << endl;
+                current_user->recetcart();
                 return NavPage();
             }
             else

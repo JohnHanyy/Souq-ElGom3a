@@ -57,21 +57,6 @@ Ewallet *User::Get_wallet(string Wname)
     return nullptr;
 }
 
-// Setters
-
-// void User::Add_Credit_card(int CVV, string card_name, int balance)
-// {
-//     if (Walletind >= 5)
-//     {
-//         cout << "The maxmum number of wallets" << endl
-//              << "please delete a wallet before trying again" << endl;
-//     }
-//     else
-//     {
-//         // Credit_card temp(CVV,card_name,balance);
-//         // Credit_cards.push_back(temp);
-//     }
-// }
 void User::Change_Password(string new_password)
 {
     Password = new_password;
@@ -91,26 +76,6 @@ void User::User_Display()
         cout << "Phone Number: " << Phone_Number << endl;
     }
 }
-// void User::Cart_Display()
-// {
-//     User_Cart.Display();
-// }
-// void User::Cards_Display()
-// {
-//     if (Walletind == 0)
-//     {
-//         cout << "No Credit Cards added" << endl;
-//     }
-//     else
-//     {
-//         cout << "Available Credit Cards" << endl;
-//         for (int i = 0; i < Walletind; i++)
-//         {
-//             Credit_cards[i].Display();
-//             cout << "//////////////////////////////////////////////////////////////////////////////\n";
-//         }
-//     }
-// }
 
 void User::Cards_Display()
 {
@@ -180,4 +145,14 @@ void User::save()
              << '\t' << Ewallets[j].getCVV();
     }
     save.close();
+}
+
+void User::recetcart()
+{
+    User_Cart.recetcart();
+}
+
+void User::Change_Email(string n)
+{
+    Email = n;
 }

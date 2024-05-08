@@ -20,6 +20,7 @@ public:
     void HomePage();
     void NavPage();
     void MarketPage();
+    void EditUsersPage();
     void UserPage();
     void CartPage();
     void WalletsPage();
