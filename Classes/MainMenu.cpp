@@ -1,8 +1,17 @@
 #include "../Sources/MainMenu.h"
 MainMenu::MainMenu() : current_user(nullptr)
 {
+    Users.load();
+    supermarket.load();
     HomePage();
 }
+
+MainMenu::~MainMenu()
+{
+    Users.save();
+    supermarket.save();
+}
+
 void MainMenu::HomePage()
 {
     int inp;
@@ -130,7 +139,7 @@ void MainMenu::NavPage()
         if (inp == 1)
             return MarketPage();
         else if (inp == 2)
-            return CartPage();
+            return;
         else if (inp == 3)
         {
             return WalletsPage();
@@ -234,17 +243,14 @@ void MainMenu::MarketPage()
         {
             string name;
             int quantity;
+            float price;
             cout << "Enter Prodcut Name : ";
             cin >> name;
             cout << "Enter Product Quantity : ";
             cin >> quantity;
-            if (quantity > supermarket.GetProduct(name)->GetterQuantity())
-            {
-                cout << "Error !!!" << endl;
-                return MarketPage();
-            }
-            current_user->GetCart()->AddProduct(supermarket.GetProduct(name), quantity);
-            cout << "Successful Added!!" << endl;
+            cout << "Enter Product Price : ";
+            cin >> price;
+            supermarket.CreateProduct(name, price, quantity);
             return MarketPage();
         }
         else if (inp == 2)
@@ -288,6 +294,36 @@ void MainMenu::UserPage()
     }
 }
 
+void MainMenu::CartPage()
+{
+    int inp;
+    cout << "\n-- CART --\n";
+    current_user->GetCart()->Display();
+    cout << endl
+         << "[1] To remove a Product" << endl
+         << "[2] Checkout" << endl
+         << "[0] return" << endl;
+    cin >> inp;
+    if (inp == 1)
+    {
+        string name;
+        cout << "Enter Name:" << endl;
+        cin >> name;
+        current_user->GetCart()->RemoveProduct(name);
+    }
+    else if (inp == 2)
+    {
+        string name;
+        cout << "Which Wallet" << endl;
+        cin >> name;
+        //
+    }
+    else
+    {
+        return NavPage();
+    }
+}
+
 void MainMenu::WalletsPage()
 {
     int choose;
@@ -295,7 +331,7 @@ void MainMenu::WalletsPage()
     current_user->Cards_Display();
     cout << "[1] To add a new card" << endl
          << "[2] To remove a card" << endl
-         << "[0] return" << endl;
+         << "[3] return" << endl;
     cin >> choose;
     if (choose == 1)
     {
@@ -330,36 +366,7 @@ void MainMenu::WalletsPage()
             return WalletsPage();
         }
     }
-    else if (choose == 0)
-    {
-        return NavPage();
-    }
-}
-void MainMenu::CartPage()
-{
-    int inp;
-    cout << "\n-- CART --\n";
-    current_user->GetCart()->Display();
-    cout << endl
-         << "[1] To remove a Product" << endl
-         << "[2] Checkout" << endl
-         << "[0] return" << endl;
-    cin >> inp;
-    if (inp == 1)
-    {
-        string name;
-        cout << "Enter Name:" << endl;
-        cin >> name;
-        current_user->GetCart()->RemoveProduct(name);
-    }
-    else if (inp == 2)
-    {
-        string name;
-        cout << "Which Wallet" << endl;
-        cin >> name;
-        //
-    }
-    else
+    else if (choose == 3)
     {
         return NavPage();
     }

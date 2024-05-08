@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
 #include "Ewallet.h"
-#include "Cart.h"
+#include "cart.h"
 
 using namespace std;
 
@@ -34,16 +35,19 @@ public:
     string Get_Name();
     string Get_Email();
     string Get_password();
-    Cart *GetCart();
-
     bool IsAdmin();
     vector<Ewallet> *Get_Cards();
+    Ewallet *Get_wallet(string);
+
+    Cart *GetCart();
+
     // Setters
     void Add_Credit_card(string, float, int, int);
     void Change_Password(string);
     void Add_Address(string);
 
     bool Delete_Wallet(string);
+    // Save and load
     void save();
     void load();
     // Display

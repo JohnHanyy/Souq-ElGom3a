@@ -12,6 +12,11 @@ User *AllUsers::Search(string find_Email)
     return nullptr;
 }
 
+AllUsers::~AllUsers()
+{
+    save();
+}
+
 User *AllUsers::CreateUser(string e, string pw, string n, int a, int num, bool admin)
 {
     User *temp = new User(n, a, e, pw, num, admin);
@@ -22,18 +27,59 @@ User *AllUsers::CreateUser(string e, string pw, string n, int a, int num, bool a
 
 void AllUsers::save()
 {
-    ofstream save;
-    save.open("allusers.dat", ios::trunc);
+    ofstream save("allusers.dat", std::ios::trunc);
     save.close();
     for (int i = 0; i < ind; i++)
     {
         All_Users[i]->save();
+        if (i < ind - 1)
+        {
+            save.open("allusers.dat", ios::app);
+            save << endl;
+            save.close();
+        }
     }
-    save.open("allusers.dat", ios::app);
-    save << endl;
-    save.close();
 }
 
 void AllUsers::load()
 {
+    int tempID;
+    string tempName;
+    string tempEmail;
+    string tempPassword;
+    int tempPhone_Number;
+    int tempAge;
+    int walletind;
+    bool tempAdmin;
+    // Ewallets temp variables
+    string card_name;
+    float card_balance;
+    int card_CVV;
+    int Card_Number;
+
+    ifstream load;
+    load.open("allusers.dat");
+    while (!load.eof())
+    {
+        load >> tempName;
+        load >> tempEmail;
+        load >> tempPassword;
+        load >> tempID;
+        load >> tempAge;
+        load >> tempPhone_Number;
+        load >> tempAdmin;
+        load >> walletind;
+        CreateUser(tempEmail, tempPassword, tempName, tempAge, tempPhone_Number, tempAdmin);
+        for (int i = 0; i < walletind; i++)
+        {
+            cout << 3;
+
+            load >> card_name;
+            load >> card_balance;
+            load >> Card_Number;
+            load >> card_CVV;
+            All_Users[tempID]->Add_Credit_card(card_name, card_balance, card_CVV, Card_Number);
+        }
+    }
+    load.close();
 }

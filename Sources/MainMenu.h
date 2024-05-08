@@ -4,8 +4,6 @@
 #include <vector>
 #include "User.h"
 #include "AllUsers.h"
-#include "Cart.h"
-
 #include "AllProducts.h"
 using namespace std;
 
@@ -18,6 +16,7 @@ private:
 
 public:
     MainMenu();
+    ~MainMenu();
     void HomePage();
     void NavPage();
     void MarketPage();

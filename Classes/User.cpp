@@ -5,6 +5,11 @@ User::User(string n, int a, string e, string pw, int num, bool adm)
 {
 }
 
+User::~User()
+{
+    delete this;
+}
+
 // getters
 bool User::IsAdmin()
 {
@@ -38,6 +43,18 @@ string User::Get_Email()
 string User::Get_password()
 {
     return Password;
+}
+
+Ewallet *User::Get_wallet(string Wname)
+{
+    for (int i = 0; i < Ewallets.size(); i++)
+    {
+        if (Ewallets[i].getName() == Wname)
+        {
+            return &Ewallets[i];
+        }
+    }
+    return nullptr;
 }
 
 // Setters
@@ -127,10 +144,12 @@ bool User::Delete_Wallet(string W_Name)
     }
     return false;
 }
+
 Cart *User::GetCart()
 {
     return &User_Cart;
 }
+
 // Save and Load
 void User::save()
 {
@@ -139,7 +158,7 @@ void User::save()
     save << Name << '\t' << Email
          << '\t' << Password << '\t' << ID
          << '\t' << Age << '\t' << Phone_Number
-         << '\t' << admin << '\t' << Ewallets.size() << '\t';
+         << '\t' << admin << '\t' << Ewallets.size();
     for (int j = 0; j < Ewallets.size(); j++)
     {
         save << '\t' << Ewallets[j].getName() << '\t'
@@ -147,11 +166,5 @@ void User::save()
              << '\t' << Ewallets[j].getCardNumber()
              << '\t' << Ewallets[j].getCVV();
     }
-    save << endl;
     save.close();
-}
-
-User::~User()
-{
-    delete this;
 }

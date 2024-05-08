@@ -17,6 +17,7 @@ private:
 public:
     // Constructor and Deconstructor
     AllUsers();
+    ~AllUsers();
 
     User *Search(string);
     User *CreateUser(string, string, string, int, int, bool);

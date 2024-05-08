@@ -42,10 +42,6 @@ void Allproducts::Refill(string n, int q)
         cout << "ERROR! PRODUCT Not Found ";
     }
 };
-Product *Allproducts::GetProduct(string name)
-{
-    return prods[name];
-}
 bool Allproducts::Search(string n)
 {
     bool res = 0;
@@ -72,4 +68,36 @@ bool Allproducts::Search(string n)
         }
     }
     return res;
+}
+
+void Allproducts::save()
+{
+    ofstream save;
+    save.open("allproduct.dat");
+    unordered_map<string, Product *>::iterator itr = prods.begin();
+    for (int i = 0; i < prods.size(); i++)
+    {
+        save << itr->second->GetterName() << '\t' << itr->second->GetterPrice() << '\t' << itr->second->GetterQuantity();
+        if (i < prods.size() - 1)
+        {
+            save << endl;
+        }
+    }
+    save.close();
+}
+void Allproducts::load()
+{
+    string tempname;
+    float tempprice;
+    int tempquantity;
+    ifstream load;
+    load.open("allproduct.dat");
+    while (!load.eof())
+    {
+        load >> tempname;
+        load >> tempprice;
+        load >> tempquantity;
+        CreateProduct(tempname, tempprice, tempquantity);
+    }
+    load.close();
 }
