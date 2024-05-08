@@ -127,7 +127,10 @@ bool User::Delete_Wallet(string W_Name)
     }
     return false;
 }
-
+Cart *User::GetCart()
+{
+    return &User_Cart;
+}
 // Save and Load
 void User::save()
 {

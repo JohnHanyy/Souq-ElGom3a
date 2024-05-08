@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Ewallet.h"
+#include "Cart.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ private:
     vector<string> Addresses;
     static int ind;
     vector<Ewallet> Ewallets;
-    // Cart User_Cart;
+    Cart User_Cart;
 
 public:
     // Constructor and Deconstructor
@@ -33,6 +34,8 @@ public:
     string Get_Name();
     string Get_Email();
     string Get_password();
+    Cart *GetCart();
+
     bool IsAdmin();
     vector<Ewallet> *Get_Cards();
     // Setters

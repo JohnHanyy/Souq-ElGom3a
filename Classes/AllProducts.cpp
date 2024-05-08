@@ -42,6 +42,10 @@ void Allproducts::Refill(string n, int q)
         cout << "ERROR! PRODUCT Not Found ";
     }
 };
+Product *Allproducts::GetProduct(string name)
+{
+    return prods[name];
+}
 bool Allproducts::Search(string n)
 {
     bool res = 0;

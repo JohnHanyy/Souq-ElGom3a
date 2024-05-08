@@ -7,17 +7,17 @@
 
 using namespace std;
 
-class Allproducts
+class Cart
 {
 private:
+    float total;
     unordered_map<string, Product *> prods;
 
 public:
-    Allproducts();
-    Product *GetProduct(string);
-    void CreateProduct(string, float, int);
-    void DeleteProduct(string);
-    bool Search(string);
-    void Refill(string, int);
+    Cart();
+    void AddProduct(Product *, int);
+    void RemoveProduct(string);
+    void CalculateTotal();
+
     void Display();
 };
