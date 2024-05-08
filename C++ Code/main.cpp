@@ -5,6 +5,7 @@
 #include "Classes/Product.cpp"
 #include "Classes/User.cpp"
 #include "Classes/Ewallet.cpp"
+#include "Classes/Cart.cpp"
 
 using namespace std;
 int main()
