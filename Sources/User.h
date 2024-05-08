@@ -42,6 +42,7 @@ public:
 
     bool Delete_Wallet(string);
     void save();
+    void load();
     // Display
     void User_Display();
     void Cart_Display();
