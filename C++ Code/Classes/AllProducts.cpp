@@ -79,6 +79,7 @@ void Allproducts::save()
     {
         save << itr->second->GetterName() << '\t' << itr->second->GetterPrice() << '\t' << itr->second->GetterQuantity();
         if (i < prods.size() - 1)
+            itr++;
         {
             save << endl;
         }
@@ -100,4 +101,9 @@ void Allproducts::load()
         CreateProduct(tempname, tempprice, tempquantity);
     }
     load.close();
+}
+
+Product *Allproducts::GetProduct(string name)
+{
+    return prods[name];
 }

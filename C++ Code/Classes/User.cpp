@@ -145,6 +145,19 @@ bool User::Delete_Wallet(string W_Name)
     return false;
 }
 
+bool User::Pay(string name)
+{
+    if (Get_wallet(name)->getBalance() >= User_Cart.Get_Toltal())
+    {
+        Get_wallet(name)->charge(User_Cart.Get_Toltal());
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 Cart *User::GetCart()
 {
     return &User_Cart;

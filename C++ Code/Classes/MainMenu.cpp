@@ -139,7 +139,7 @@ void MainMenu::NavPage()
         if (inp == 1)
             return MarketPage();
         else if (inp == 2)
-            return;
+            return CartPage();
         else if (inp == 3)
         {
             return WalletsPage();
@@ -243,14 +243,17 @@ void MainMenu::MarketPage()
         {
             string name;
             int quantity;
-            float price;
             cout << "Enter Prodcut Name : ";
             cin >> name;
             cout << "Enter Product Quantity : ";
             cin >> quantity;
-            cout << "Enter Product Price : ";
-            cin >> price;
-            supermarket.CreateProduct(name, price, quantity);
+            if (quantity > supermarket.GetProduct(name)->GetterQuantity())
+            {
+                cout << "Error !!!" << endl;
+                return MarketPage();
+            }
+            current_user->GetCart()->AddProduct(supermarket.GetProduct(name), quantity);
+            cout << "Successful Added!!" << endl;
             return MarketPage();
         }
         else if (inp == 2)
@@ -316,7 +319,25 @@ void MainMenu::CartPage()
         string name;
         cout << "Which Wallet" << endl;
         cin >> name;
-        //
+
+        if (current_user->Get_wallet(name))
+        {
+            if (current_user->Pay(name))
+            {
+                cout << "Pay successful" << endl;
+                return NavPage();
+            }
+            else
+            {
+                cout << "Can not find that Wallet Try again" << endl;
+                return CartPage();
+            }
+        }
+        else
+        {
+            cout << "wallet not found" << endl;
+            return CartPage();
+        }
     }
     else
     {

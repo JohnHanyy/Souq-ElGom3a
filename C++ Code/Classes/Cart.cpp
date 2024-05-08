@@ -42,3 +42,8 @@ void Cart::RemoveProduct(string n)
     prods.erase(n);
     return CalculateTotal();
 }
+
+float Cart::Get_Toltal()
+{
+    return total;
+}

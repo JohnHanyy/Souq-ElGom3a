@@ -15,6 +15,7 @@ private:
 
 public:
     Allproducts();
+    Product *GetProduct(string);
     void CreateProduct(string, float, int);
     void DeleteProduct(string);
     bool Search(string);

@@ -2,7 +2,8 @@
 #include "login.h"
 MainWindow::MainWindow()
     : current_user(nullptr)
-{}
+{
+}
 
 void MainWindow::start()
 {

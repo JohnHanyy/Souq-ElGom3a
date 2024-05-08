@@ -18,6 +18,7 @@ public:
     void AddProduct(Product *, int);
     void RemoveProduct(string);
     void CalculateTotal();
-
     void Display();
+
+    float Get_Toltal();
 };

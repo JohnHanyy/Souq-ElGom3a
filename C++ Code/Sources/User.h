@@ -40,7 +40,7 @@ public:
     Ewallet *Get_wallet(string);
 
     Cart *GetCart();
-
+    bool Pay(string);
     // Setters
     void Add_Credit_card(string, float, int, int);
     void Change_Password(string);
@@ -49,10 +49,8 @@ public:
     bool Delete_Wallet(string);
     // Save and load
     void save();
-    void load();
     // Display
     void User_Display();
-    void Cart_Display();
     void Cards_Display();
     ~User();
 };
