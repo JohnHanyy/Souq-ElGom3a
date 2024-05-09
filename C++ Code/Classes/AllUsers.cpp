@@ -1,5 +1,6 @@
 #include "../Sources/AllUsers.h"
 AllUsers::AllUsers() { ind = 0; };
+AllUsers::~AllUsers(){};
 User *AllUsers::Search(string find_Email)
 {
     for (int i = 0; i < All_Users.size(); i++)
@@ -70,6 +71,10 @@ void AllUsers::load()
     while (!load.eof())
     {
         load >> tempName;
+        if (tempName == "")
+        {
+            break;
+        }
         load >> tempEmail;
         load >> tempPassword;
         load >> tempID;
