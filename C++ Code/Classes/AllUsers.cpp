@@ -68,13 +68,8 @@ void AllUsers::load()
 
     ifstream load;
     load.open("allusers.dat");
-    while (!load.eof())
+    while (load >> tempName)
     {
-        load >> tempName;
-        if (tempName == "")
-        {
-            break;
-        }
         load >> tempEmail;
         load >> tempPassword;
         load >> tempID;

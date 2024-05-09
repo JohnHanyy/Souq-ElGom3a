@@ -97,9 +97,8 @@ void Allproducts::load()
     string tempcat;
     ifstream load;
     load.open("allproduct.dat");
-    while (!load.eof())
+    while (load >> tempname)
     {
-        load >> tempname;
         load >> tempprice;
         load >> tempquantity;
         load >> tempcat;
