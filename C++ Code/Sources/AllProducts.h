@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <fstream>
 #include "Product.h"
+#include <vector>
 
 using namespace std;
 

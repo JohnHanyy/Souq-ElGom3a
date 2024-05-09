@@ -80,7 +80,7 @@ void Allproducts::save()
     unordered_map<string, Product *>::iterator itr = prods.begin();
     for (int i = 0; i < prods.size(); i++)
     {
-        save << itr->second->GetterName() << '\t' << itr->second->GetterPrice() << '\t' << itr->second->GetterQuantity();
+        save << itr->second->GetterName() << '\t' << itr->second->GetterPrice() << '\t' << itr->second->GetterQuantity()<< '\t' << itr->second->Get_category();
         if (i < prods.size() - 1)
             itr++;
         {
