@@ -199,7 +199,7 @@ void MainMenu::EditUsersPage()
         {
             Users.CreateUser(Email, Password, name, age, num, a);
             cout << "Successful Creation !!" << endl;
-            return Login();
+            return EditUsersPage();
         }
         else
         {
@@ -230,6 +230,8 @@ void MainMenu::EditUsersPage()
         string Email;
         string temp;
         bool choose;
+        cout << "Enter User's Email" << endl;
+        cin >> Email;
         if (Users.Search(Email))
         {
             User *tempuser = Users.Search(Email);
@@ -239,8 +241,7 @@ void MainMenu::EditUsersPage()
             cout << "Not found" << endl;
             return EditUsersPage();
         }
-        cout << "Enter User's Email" << endl;
-        cin >> Email;
+
         User *tempuser = Users.Search(Email);
         cout << "Choose what you want to change" << endl;
         cout << "[0] Email" << endl;
@@ -249,12 +250,14 @@ void MainMenu::EditUsersPage()
         if (choose == 0)
         {
             cout << "choose What you want to change to" << endl;
+            cin >> temp;
             tempuser->Change_Email(temp);
             return EditUsersPage();
         }
         else if (choose == 1)
         {
             cout << "choose What you want to change to" << endl;
+            cin >> temp;
             tempuser->Change_Password(temp);
             return EditUsersPage();
         }

@@ -29,7 +29,7 @@ void AllUsers::save()
 {
     ofstream save("allusers.dat", std::ios::trunc);
     save.close();
-    for (int i = 0; i < ind; i++)
+    for (int i = 0; i < All_Users.size(); i++)
     {
         All_Users[i]->save();
         if (i < ind - 1)
