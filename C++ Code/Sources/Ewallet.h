@@ -14,8 +14,6 @@ private:
 public:
     Ewallet(string n, float b, int pass, int num);
 
-    void newCard(string n, float b, int pass, int num);
-
     void addBalance(float amount);
 
     void charge(float amount);

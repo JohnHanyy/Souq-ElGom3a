@@ -1,5 +1,5 @@
 #include "../Sources/AllUsers.h"
-AllUsers::AllUsers(){};
+AllUsers::AllUsers() { ind = 0; };
 User *AllUsers::Search(string find_Email)
 {
     for (int i = 0; i < All_Users.size(); i++)
@@ -10,11 +10,6 @@ User *AllUsers::Search(string find_Email)
         }
     }
     return nullptr;
-}
-
-AllUsers::~AllUsers()
-{
-    save();
 }
 
 User *AllUsers::CreateUser(string e, string pw, string n, int a, int num, bool admin)
@@ -85,8 +80,6 @@ void AllUsers::load()
         CreateUser(tempEmail, tempPassword, tempName, tempAge, tempPhone_Number, tempAdmin);
         for (int i = 0; i < walletind; i++)
         {
-            cout << 3;
-
             load >> card_name;
             load >> card_balance;
             load >> Card_Number;

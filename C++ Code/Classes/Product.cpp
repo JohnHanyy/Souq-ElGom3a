@@ -2,10 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-Product::Product(string n, float p, int q, string c) : id(ind++), name(n), price(p), quantity(q)
-{
-    Cat = c;
-};
+Product::Product(string n, float p, int q, string c) : id(ind++), name(n), price(p), quantity(q), Cat(c){};
 
 void Product::display()
 {

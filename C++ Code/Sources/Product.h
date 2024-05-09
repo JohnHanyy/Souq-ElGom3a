@@ -1,13 +1,6 @@
 #pragma once
 #include <string>
 using namespace std;
-// enum Category
-// {
-//     food = 0,        // =0
-//     Electronics = 1, // =1
-//     books = 2,       // =2
-//     others = 3       // =3
-// };
 class Product
 {
 private:
@@ -16,7 +9,6 @@ private:
     float price;
     int quantity;
     static int ind;
-
     string Cat;
 
 public:
