@@ -47,6 +47,14 @@ void AllUsers::Display()
 
 void AllUsers::removeuser(int id)
 {
+    for (size_t i = 0; i < All_Users.size(); i++)
+    {
+        if (All_Users[i]->Get_ID() == id)
+        {
+            id = i;
+            break;
+        }
+    }
     All_Users.erase(All_Users.begin() + id);
 }
 
@@ -70,6 +78,7 @@ void AllUsers::load()
     load.open("allusers.dat");
     while (load >> tempName)
     {
+
         load >> tempEmail;
         load >> tempPassword;
         load >> tempID;
