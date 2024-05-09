@@ -24,14 +24,13 @@ void MainMenu::HomePage()
 
     cout << "[1] Login" << endl;
     cout << "[2] Register " << endl;
-    cout << "[0] Exit " << endl;
     cout << "[-1] About " << endl;
-
+    cout << "[0] Exit " << endl;
     cin >> inp;
     if (inp == 1)
-        Login();
+        return Login();
     else if (inp == 2)
-        Register();
+        return Register();
     else if (inp == -1)
     {
         cout << endl
@@ -49,11 +48,9 @@ void MainMenu::Login()
     cout << endl
          << "-- LOGIN -- "
          << endl;
-    cout << endl
-         << "Enter Your Email : ";
+    cout << "Enter Your Email : ";
     cin >> Email;
-    cout << endl
-         << "Enter Your Password : ";
+    cout << "Enter Your Password : ";
     cin >> Password;
     current_user = Users.Search(Email);
     if (!current_user)
@@ -76,6 +73,23 @@ void MainMenu::Login()
     else if (current_user->Get_password() == Password)
     {
         return NavPage();
+    }
+    else
+    {
+        bool inp;
+        cout << endl
+             << "Error! Invalid Email or Password!!!" << endl;
+        cout << "[0] Create New Account " << endl;
+        cout << "[1] Try Again! " << endl;
+        cin >> inp;
+        if (inp)
+        {
+            return Login();
+        }
+        else
+        {
+            return Register();
+        }
     }
 }
 void MainMenu::Register()
@@ -141,9 +155,7 @@ void MainMenu::NavPage()
         else if (inp == 2)
             return CartPage();
         else if (inp == 3)
-        {
             return WalletsPage();
-        }
         else if (inp == 4)
             return UserPage();
         else
@@ -229,32 +241,31 @@ void MainMenu::EditUsersPage()
     {
         string Email;
         string temp;
-        bool choose;
+        bool inp;
+        User *tempuser;
         cout << "Enter User's Email" << endl;
         cin >> Email;
         if (Users.Search(Email))
         {
-            User *tempuser = Users.Search(Email);
+            tempuser = Users.Search(Email);
         }
         else
         {
             cout << "Not found" << endl;
             return EditUsersPage();
         }
-
-        User *tempuser = Users.Search(Email);
         cout << "Choose what you want to change" << endl;
         cout << "[0] Email" << endl;
         cout << "[1] Password" << endl;
-        cin >> choose;
-        if (choose == 0)
+        cin >> inp;
+        if (inp == 0)
         {
             cout << "choose What you want to change to" << endl;
             cin >> temp;
             tempuser->Change_Email(temp);
             return EditUsersPage();
         }
-        else if (choose == 1)
+        else if (inp == 1)
         {
             cout << "choose What you want to change to" << endl;
             cin >> temp;
@@ -262,10 +273,9 @@ void MainMenu::EditUsersPage()
             return EditUsersPage();
         }
     }
-    else if (ind == 0)
-    {
+    else
+
         return NavPage();
-    }
 }
 
 void MainMenu::MarketPage()
@@ -283,20 +293,30 @@ void MainMenu::MarketPage()
         cout << "[3] Delete Product " << endl;
         cout << "[4] Search for a Product " << endl;
         cout << "[0] Return To MainMenu " << endl;
-
         cin >> inp;
         if (inp == 1)
         {
             string name;
             int quantity;
             float price;
+            string type;
             cout << "Enter Prodcut Name : ";
             cin >> name;
             cout << "Enter Product Quantity : ";
             cin >> quantity;
             cout << "Enter Product Price : ";
             cin >> price;
-            supermarket.CreateProduct(name, price, quantity);
+            cout << "Enter Product Type" << endl;
+            supermarket.DisplayAllCats();
+            cout << "choose the category" << endl;
+            cin >> type;
+            if (!supermarket.findcategory(type))
+            {
+                supermarket.Addcategory(type);
+                supermarket.CreateProduct(name, price, quantity, type);
+                return MarketPage();
+            }
+            supermarket.CreateProduct(name, price, quantity, type);
             return MarketPage();
         }
         else if (inp == 2)
@@ -320,16 +340,35 @@ void MainMenu::MarketPage()
         }
         else if (inp == 4)
         {
+            bool choose;
             string name;
-            cout << "Search: ";
-            cin >> name;
-            cout << " -- SEARCH RESULTS -- " << endl;
-            if (!supermarket.Search(name))
+            cout << "[0] Search by name" << endl;
+            cout << "[1] Search by category" << endl;
+            cin >> choose;
+            if (!choose)
             {
-                cout << " \t Nothing Found !!" << endl;
+                cout << "Search: ";
+                cin >> name;
+                cout << " -- SEARCH RESULTS -- " << endl;
+                if (!supermarket.Search(name))
+                {
+                    cout << " \t Nothing Found !!" << endl;
+                }
+                cout << endl;
+                return MarketPage();
             }
-            cout << endl;
-            return MarketPage();
+            else if (choose)
+            {
+                string cat;
+                string anth;
+                cout << "Enter Categoty" << endl;
+                supermarket.DisplayAllCats();
+                cin >> cat;
+                supermarket.DisplayCategory(cat);
+                cout << "enter anything to return" << endl;
+                cin >> anth;
+                return MarketPage();
+            }
         }
         else
         {
@@ -381,7 +420,7 @@ void MainMenu::MarketPage()
 }
 void MainMenu::UserPage()
 {
-    int inp;
+    string inp;
     cout << "Email: " << current_user->Get_Email() << endl;
     cout << "Password: " << current_user->Get_password() << endl;
     cout << "Username: " << current_user->Get_Name() << endl;
@@ -389,16 +428,9 @@ void MainMenu::UserPage()
     cout << "Phone Number: " << current_user->Get_Phone_Num() << endl;
     cout << "Admin: " << current_user->IsAdmin() << endl;
     cout << endl
-         << "[0] Return To NavPage" << endl;
+         << "Enter Anything Return To NavPage" << endl;
     cin >> inp;
-    if (inp == 0)
-    {
-        return NavPage();
-    }
-    else
-    {
-        return UserPage();
-    }
+    return NavPage();
 }
 
 void MainMenu::CartPage()
@@ -416,8 +448,8 @@ void MainMenu::CartPage()
         string name;
         cout << "Enter Name:" << endl;
         cin >> name;
-        int i = current_user->GetCart()->RemoveProduct(name);
-        supermarket.GetProduct(name)->IncreaseQuantity(i);
+        int q = current_user->GetCart()->RemoveProduct(name);
+        supermarket.GetProduct(name)->IncreaseQuantity(q);
         return CartPage();
     }
     else if (inp == 2)
@@ -431,18 +463,18 @@ void MainMenu::CartPage()
             if (current_user->Pay(name))
             {
                 cout << "Pay successful" << endl;
-                current_user->recetcart();
+                current_user->resetcart();
                 return NavPage();
             }
             else
             {
-                cout << "Can not find that Wallet Try again" << endl;
+                cout << "Not Enough Balance!!" << endl;
                 return CartPage();
             }
         }
         else
         {
-            cout << "wallet not found" << endl;
+            cout << "wallet not found!!" << endl;
             return CartPage();
         }
     }
@@ -454,14 +486,14 @@ void MainMenu::CartPage()
 
 void MainMenu::WalletsPage()
 {
-    int choose;
+    int inp;
     cout << "Your Wallets" << endl;
     current_user->Cards_Display();
     cout << "[1] To add a new card" << endl
          << "[2] To remove a card" << endl
-         << "[3] return" << endl;
-    cin >> choose;
-    if (choose == 1)
+         << "[0] return" << endl;
+    cin >> inp;
+    if (inp == 1)
     {
         string name;
         float balance;
@@ -478,7 +510,7 @@ void MainMenu::WalletsPage()
         cout << "Card added" << endl;
         return WalletsPage();
     }
-    if (choose == 2)
+    if (inp == 2)
     {
         string cardname;
         cout << "Enter the card name" << endl;
@@ -490,12 +522,10 @@ void MainMenu::WalletsPage()
         }
         else
         {
-            cout << "card not found" << endl;
+            cout << "card not found!!" << endl;
             return WalletsPage();
         }
     }
-    else if (choose == 3)
-    {
+    else
         return NavPage();
-    }
 }

@@ -28,7 +28,7 @@ void Cart::AddProduct(Product *a, int q)
     if (!prods[a->GetterName()])
     {
         a->IncreaseQuantity(-q);
-        Product *tmp = new Product(a->GetterName(), a->GetterPrice(), q);
+        Product *tmp = new Product(a->GetterName(), a->GetterPrice(), q, a->Get_category());
         prods[a->GetterName()] = tmp;
     }
     else
@@ -51,7 +51,8 @@ float Cart::Get_Toltal()
     return total;
 }
 
-void Cart::recetcart()
+void Cart::resetcart()
 {
+    total = 0;
     prods.clear();
 }

@@ -19,6 +19,6 @@ public:
     int RemoveProduct(string);
     void CalculateTotal();
     void Display();
-    void recetcart();
+    void resetcart();
     float Get_Toltal();
 };

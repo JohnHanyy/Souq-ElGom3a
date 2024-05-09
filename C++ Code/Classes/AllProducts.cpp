@@ -2,6 +2,9 @@
 
 Allproducts::Allproducts()
 {
+    Catrgories.push_back("Food");
+    Catrgories.push_back("Electronics");
+    Catrgories.push_back("Books");
 }
 
 void Allproducts::Display()
@@ -14,11 +17,11 @@ void Allproducts::Display()
         iter.second->display();
     }
 }
-void Allproducts::CreateProduct(string n, float p, int q)
+void Allproducts::CreateProduct(string n, float p, int q, string t)
 {
     if (!prods[n])
     {
-        Product *tmp = new Product(n, p, q);
+        Product *tmp = new Product(n, p, q, t);
         prods[n] = tmp;
     }
     else
@@ -91,6 +94,7 @@ void Allproducts::load()
     string tempname;
     float tempprice;
     int tempquantity;
+    string tempcat;
     ifstream load;
     load.open("allproduct.dat");
     while (!load.eof())
@@ -98,7 +102,8 @@ void Allproducts::load()
         load >> tempname;
         load >> tempprice;
         load >> tempquantity;
-        CreateProduct(tempname, tempprice, tempquantity);
+        load >> tempcat;
+        CreateProduct(tempname, tempprice, tempquantity, tempcat);
     }
     load.close();
 }
@@ -106,4 +111,42 @@ void Allproducts::load()
 Product *Allproducts::GetProduct(string name)
 {
     return prods[name];
+}
+
+void Allproducts::DisplayCategory(string n)
+{
+    unordered_map<string, Product *>::iterator itr = prods.begin();
+    for (int i = 0; i < prods.size(); i++)
+    {
+        if (itr->second->Get_category() == n)
+        {
+            itr->second->display();
+        }
+        itr++;
+    }
+}
+
+void Allproducts::DisplayAllCats()
+{
+    for (int i = 0; i < Catrgories.size(); i++)
+    {
+        cout << Catrgories[i] << endl;
+    }
+}
+
+void Allproducts::Addcategory(string cat)
+{
+    Catrgories.push_back(cat);
+}
+
+bool Allproducts::findcategory(string n)
+{
+    for (int i = 0; i < Catrgories.size(); i++)
+    {
+        if (Catrgories[i] == n)
+        {
+            return 1;
+        }
+    }
+    return 0;
 }

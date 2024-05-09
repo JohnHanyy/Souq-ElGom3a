@@ -46,7 +46,7 @@ public:
     void Change_Email(string);
     void Change_Password(string);
     void Add_Address(string);
-    void recetcart();
+    void resetcart();
     bool Delete_Wallet(string);
     // Save and load
     void save();

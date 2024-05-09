@@ -147,9 +147,9 @@ void User::save()
     save.close();
 }
 
-void User::recetcart()
+void User::resetcart()
 {
-    User_Cart.recetcart();
+    User_Cart.resetcart();
 }
 
 void User::Change_Email(string n)
